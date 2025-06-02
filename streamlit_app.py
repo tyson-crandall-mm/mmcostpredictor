@@ -111,6 +111,23 @@ with st.sidebar:
   else:
     st.error("Please select both a start and end date.")
   # Get User Input in DataFrame
-  user_data = {"ProjectOffice": project_office, "ProjectState": project_state, "ProjectRegion": project_region, "ClientType": client_type, "Services": services, "StaffWorkDistribution": staff_workload, "ProjectComplexity": project_complexity, "ProjectHours": project_hours, "EstimatedDates": estimated_dates}
-st.write("### User Input Summary")
-st.write(user_data)
+  user_data = {}
+
+# Only populate if required fields are filled
+if project_office and project_state and client_type and estimated_dates:
+  user_data = {
+      "ProjectOffice": project_office,
+      "ProjectState": project_state,
+      "ProjectRegion": project_region,
+      "ClientType": client_type,
+      "Services": services,
+      "StaffWorkDistribution": staff_workload,
+      "ProjectComplexity": project_complexity,
+      "ProjectHours": project_hours,
+      "EstimatedDates": estimated_dates
+  }
+  st.success("All inputs collected successfully!")
+  st.json(user_data)
+else:
+  st.warning("Please complete all required fields to generate a project summary.")
+
