@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from datetime import date, timedelta
 import gspread
+project_region = None
 
 st.title('M&M Machine Learning Cost Proposal Tool')
 st.info('This is an Aid, Final Proposals are Subject to Partner Reviews')
@@ -20,7 +21,6 @@ url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=
 df = pd.read_csv(url)
 df
 
-project_region = None
 user_df = df
 user_df = user_df.iloc[:0]
 #Sidebar Integration
