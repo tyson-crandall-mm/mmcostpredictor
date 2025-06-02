@@ -45,7 +45,8 @@ with st.sidebar:
     else:
         return "Unknown"
   # Getting Client Region
-  if project_state not None:
+  project_region = None
+  if project_state:
     project_region = get_region(project_state)
   # Getting Project Client Type
   client_type = st.selectbox('Client Type', ("Corporation", "Fiduciary", "Individual", "Non-Profit", "Partnership"), index=None, placeholder="Client Type...")
