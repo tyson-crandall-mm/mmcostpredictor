@@ -64,7 +64,7 @@ with st.sidebar:
   # Getting Project Start Date
   start_date = st.date_input('Estimated Start and Finish Date')
   default_start = date.today()
-  default_finish = today + timedelta(days=1)
+  default_finish = default_start + timedelta(days=1)
   estimated_start_date, estimated_end_date = st.date_input("Project Estimated Start and Finish Date", value=(default_start, default_finish))
   st.write(f"Start Date: {default_start}")
   st.write(f"End Date: {default_finish}")
