@@ -76,7 +76,7 @@ with st.sidebar:
   )
   # Getting Project Hours
   project_hours = {0: "Extremely Little", 1: "Quite Little", 2: "Little", 3: "Moderate", 4: "High", 5: "Quite High", 6:"Extremely High"}
-  project_complexity = st.segmented_control("Project Hours", options=project_hours.keys(), format_func=lambda option: project_hours[option], selection_mode="single")
+  project_complexity = st.pills("Project Hours", options=project_hours.keys(), format_func=lambda option: project_hours[option], selection_mode="single")
   
   # Check if a valid date range was returned
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
