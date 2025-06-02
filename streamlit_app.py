@@ -27,6 +27,6 @@ with st.sidebar:
   client_type = st.selectbox('Client Type', ("Corporation", "Fiduciary", "Individual", "Non-Profit", "Partnership"))
   staff_workload = {}
   staff_on_project = st.multiselect("Select Seniority of Staff Member(s) on the Project", ["Senior Manager", "Administrator", "Staff", "Director", "Manager", "Officer", "Senior", "Associate", "Senior Executive", "Seasonal", "Owner", "Intern", "Intern PT", "Consultant", "Intern FT"])
-    for level in staff_on_project:
-      percent = st.slider(f'{level} - Estimated Percent of Work:', min_value=0, max_value=100, step=5, key=f"slider_{level}")
-      staff_workload[level] = percent
+  for level in staff_on_project:
+    percent = st.slider(f'{level} - Estimated Percent of Work:', min_value=0, max_value=100, step=5, key=f"slider_{level}")
+    staff_workload[level] = percent
