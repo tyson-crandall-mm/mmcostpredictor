@@ -22,7 +22,6 @@ df
 
 user_df = df
 user_df = user_df.iloc[:0]
-user_df
 #Sidebar Integration
 with st.sidebar:
   st.write("# Project Characteristics")
@@ -140,6 +139,7 @@ new_row = {col: 0 for col in user_df.columns}
 
 if project_office in user_df.columns:
     new_row[project_office] = 1
+    user_df
 
 if project_state in user_df.columns:
     new_row[project_state] = 1
