@@ -101,9 +101,7 @@ with st.sidebar:
   default_start = date.today()
   default_finish = default_start + timedelta(days=1)
   # Ask user for date range input
-  estimated_dates = st.date_input(
-    "Project Estimated Start and Finish Date",
-    value=(default_start, default_finish)
+  estimated_dates = st.date_input("Project Estimated Start and Finish Date", value=(default_start, default_finish)
   # Check if a valid date range was returned
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
     estimated_start_date, estimated_end_date = estimated_dates
