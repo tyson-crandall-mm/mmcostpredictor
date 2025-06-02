@@ -77,7 +77,17 @@ with st.sidebar:
   # Getting Project Hours
   project_hours = {0: "Extremely Little", 1: "Quite Little", 2: "Little", 3: "Moderate", 4: "High", 5: "Quite High", 6:"Extremely High"}
   project_complexity = st.pills("Project Hours", options=project_hours.keys(), format_func=lambda option: project_hours[option], selection_mode="single")
-  st.warning("Extremely little: 0 to 1 hours \n Quite Little: 1 to 2 hours \n Little: 2 to 5 hours \n Moderate: 5 to 11 hours \n High: 11 to 39 hours \n Quite High: 39 to 80 hours \n Extremely High: 80 to 932 hours")
+  st.warning("""\
+  **Project Hours Guide**  
+  - Extremely Little: 0 to 1 hours  
+  - Quite Little: 1 to 2 hours  
+  - Little: 2 to 5 hours  
+  - Moderate: 5 to 11 hours  
+  - High: 11 to 39 hours  
+  - Quite High: 39 to 80 hours  
+  - Extremely High: 80+ hours\
+  """)
+
   
   # Check if a valid date range was returned
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
