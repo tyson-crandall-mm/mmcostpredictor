@@ -117,7 +117,8 @@ with st.sidebar:
   user_data = {}
 
 # Only populate if required fields are filled
-if project_office and project_state and project_region and client_type and services and staff_workload and project_complexity and project_hours and estimated_dates:
+user_data = {}
+if all([project_office, project_state, project_region, client_type, services, staff_workload, project_complexity, project_hours, isinstance(estimated_dates, tuple) and len(estimated_dates) == 2]):
   user_data = {
       "ProjectOffice": project_office,
       "ProjectState": project_state,
