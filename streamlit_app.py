@@ -133,17 +133,13 @@ if project_office and project_state and project_region and client_type and servi
   st.json(user_data)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
+#
+user_df.drop(columns = "ActualBudgetAmount")
 
-new_row = pd.Series({col: np.nan for col in user_df.columns})
+new_row = {col: 0 for col in user_df.columns}
 
-# Update with values from user_data where keys match column names
-for key, value in user_data.items():
-    if key in new_row:
-        new_row[key] = value
+if project_office in user_df.columns:
+    new_row[project_office] = 1
 
-# Append the row to your main dataframe
-user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-
-st.success("Data appended successfully!")
-st.dataframe(user_df)
-
+if project_state in user_df.columns:
+    new_row[project_state] = 1
