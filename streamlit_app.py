@@ -28,11 +28,11 @@ with st.sidebar:
   # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"), index=None, placeholder="Location...")
   # Getting Project Location
-  south = {"Florida", "Texas", "Georgia", "South Carolina", "North Carolina", "Tennessee", "Virginia", "Arkansas", "Kentucky", "Alabama", "Maryland", "District of Columbia", "Puerto Rico"}
-  northeast = {"New York", "Massachusetts", "Connecticut", "New Jersey", "Pennsylvania", "Maine"}
-  midwest = {"Illinois", "Indiana", "Ohio", "Michigan", "Wisconsin", "Missouri", "Iowa", "Other"}
-  west = {"California", "Colorado", "Washington", "Oregon", "Nevada", "Arizona", "Idaho", "Montana", "New Mexico", "Utah"}
-  project_state = st.selectbox('Project State', ("Alaska",	"Arkansas",	"Arizona",	"California",	"Colorado",	"Connecticut",	"District of Columbia",	"Florida",	"Georgia", "Iowa",	"Idaho",	"Illinois",	"Indiana",	"Kansas",	"Kentucky",	"Massachusetts",	"Maryland",	"Maine",	"Michigan",	"Minnesota",	"Missouri",	"Montana",	"North Carolina",	"New Mexico",	"Nevada",	"New York",	"Ohio",	"Oklahoma",	"Oregon", "Pennsylvania",	"Puerta Rico",	"South Carolina",	"Tennessee",	"Texas",	"Virginia",	"Washington",	"Wisconsin",	"West Virginia", "Other"), index=None, placeholder="State...")
+  south = {"FL", "TX", "GA", "SC", "NC", "TN", "VA", "AR", "KY", "AL", "MD", "DC", "PR"}
+  northeast = {"NY", "MA", "CT", "NJ", "PA", "ME"}
+  midwest = {"IL", "IN", "OH", "MI", "WI", "MO", "IA"}
+  west = {"CA", "CO", "WA", "OR", "NV", "AZ", "ID", "MT", "NM", "UT"}
+  project_state = st.selectbox('Project State', ("AK",	"AR",	"AZ",	"CA",	"CO",	"CT",	"DC",	"FL",	"GA", "IA",	"ID",	"IL",	"IN",	"KS",	"KY",	"MA",	"MD",	"ME",	"MI",	"MN",	"MO",	"MT",	"NC",	"NM",	"NV",	"NY",	"OH",	"OK",	"OR", "PA",	"PR",	"SC",	"TN",	"TX",	"VA",	"WA",	"WI",	"WV"), index=None, placeholder="State...")
   def get_region(state):
     if state in south:
         return "South"
@@ -140,7 +140,14 @@ new_row = {col: 0 for col in user_df.columns}
 if project_office in user_df.columns:
     new_row[project_office] = 1
     user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-    user_df
-
 if project_state in user_df.columns:
     new_row[project_state] = 1
+    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+if project_region in user_df.columns:
+    new_row[project_region] = 1
+    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+if client_type in user_df.columns:
+    new_row[client_type] = 1
+    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+user_df
+
