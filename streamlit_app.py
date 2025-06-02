@@ -65,7 +65,7 @@ with st.sidebar:
       st.success("Total is exactly 100%. Ready to proceed!")
   # Getting Project Complexity
   complexity_levels = {0: "Basic", 1: "Easy", 2: "Moderate", 3: "Complex"}
-  project_complexity = st.segmented_control("Tool", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
+  project_complexity = st.segmented_control("Project Complexity Level", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
   # Getting Project Dates
   default_start = date.today()
   default_finish = default_start + timedelta(days=1)
