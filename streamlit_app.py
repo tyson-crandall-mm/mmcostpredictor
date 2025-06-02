@@ -4,6 +4,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
+from datetime import date, timedelta
 import gspread
 
 st.title('M&M Machine Learning Cost Proposal Tool')
@@ -19,18 +20,22 @@ url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=
 # Load into DataFrame
 df = pd.read_csv(url)
 df
-
+#Sidebar Integration
 with st.sidebar:
   st.header("Project Characteristics")
+  # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"))
+  # Getting Project Location
   project_state = st.selectbox('Project State', ("Alaska",	"Arkansas",	"Arizona",	"California",	"Colorado",	"Connecticut",	"District of Columbia",	"Florida",	"Georgia", "Iowa",	"Idaho",	"Illinois",	"Indiana",	"Kansas",	"Kentucky",	"Massachusetts",	"Maryland",	"Maine",	"Michigan",	"Minnesota",	"Missouri",	"Montana",	"North Carolina",	"New Mexico",	"Nevada",	"New York",	"Ohio",	"Oklahoma",	"Oregon", "Pennsylvania",	"Puerta Rico",	"South Carolina",	"Tennessee",	"Texas",	"Virginia",	"Washington",	"Wisconsin",	"West Virginia", "Other"))
+  # Getting Project Client Type
   client_type = st.selectbox('Client Type', ("Corporation", "Fiduciary", "Individual", "Non-Profit", "Partnership"))
+  # Getting Staff Composition
   selected_roles = st.multiselect("Select Seniority of Staff Member(s) on the Project", ["Senior Manager", "Administrator", "Staff", "Director", "Manager", "Officer", "Senior", "Associate", "Senior Executive", "Seasonal", "Owner", "Intern", "Intern PT", "Consultant", "Intern FT"])
   # Initialize workload dictionary
   staff_workload = {}
   total = 0
   
-  st.write("### Enter workload percentages (must total 100%)")
+  st.write("#### Enter workload percentages (must total 100%)")
   
   # Display number inputs for selected roles
   cols = st.columns(2)
@@ -56,3 +61,5 @@ with st.sidebar:
       st.error("Total exceeds 100%. Please adjust the values.")
   else:
       st.success("Total is exactly 100%. Ready to proceed!")
+  # Getting Project Start Date
+  start_date = st.date_input('Estimated Start and Finish Date')
