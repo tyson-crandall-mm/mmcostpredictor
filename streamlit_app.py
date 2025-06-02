@@ -1,4 +1,4 @@
-"""import streamlit as st
+import streamlit as st
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -115,67 +115,5 @@ with st.sidebar:
     st.error("Please select both a start and end date.")
   # Get User Input in DataFrame
   user_data = {"ProjectOffice": project_office, "ProjectState": project_state, "ProjectRegion": project_region, "ClientType": client_type, "Services": services, "StaffWorkDistribution": staff_workload, "ProjectComplexity": project_complexity, "ProjectHours": project_hours, "EstimatedDates": estimated_dates}
-  st.write(user_data)"""
-
-  # Getting Project Complexity
-  complexity_levels = {1: "Basic", 2: "Easy", 3: "Moderate", 4: "Complex"}
-  project_complexity = st.segmented_control(
-      "Project Complexity Level",
-      options=complexity_levels.keys(),
-      format_func=lambda option: complexity_levels[option],
-      selection_mode="single"
-  )
-
-  # Getting Project Hours
-  hour_levels = {
-      1: "Extremely Little", 2: "Quite Little", 3: "Little",
-      4: "Moderate", 5: "High", 6: "Quite High", 7: "Extremely High"
-  }
-  project_hours = st.pills(
-      "Project Hours",
-      options=hour_levels.keys(),
-      format_func=lambda option: hour_levels[option],
-      selection_mode="single"
-  )
-
-  st.warning("""\
-  **Project Hours Guide**  
-  - Extremely Little: 0 to 1 hours  
-  - Quite Little: 1 to 2 hours  
-  - Little: 2 to 5 hours  
-  - Moderate: 5 to 11 hours  
-  - High: 11 to 39 hours  
-  - Quite High: 39 to 80 hours  
-  - Extremely High: 80+ hours\
-  """)
-
-  # Getting Project Dates
-  default_start = date.today()
-  default_finish = default_start + timedelta(days=1)
-
-  estimated_dates = st.date_input(
-      "Project Estimated Start and Finish Date",
-      value=(default_start, default_finish)
-  )
-
-  if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
-      estimated_start_date, estimated_end_date = estimated_dates
-      if estimated_start_date > estimated_end_date:
-          st.error("Start date must be before or equal to end date.")
-  else:
-      st.error("Please select both a start and end date.")
-
-  # Collecting Final User Input
-  user_data = {
-      "ProjectOffice": project_office,
-      "ProjectState": project_state,
-      "ProjectRegion": project_region,
-      "ClientType": client_type,
-      "Services": services,
-      "StaffWorkDistribution": staff_workload,
-      "ProjectComplexity": project_complexity,
-      "ProjectHours": project_hours,
-      "EstimatedDates": estimated_dates
-  }
-
-  st.write(user_data)
+st.write("### User Input Summary")
+st.write(user_data)
