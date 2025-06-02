@@ -11,8 +11,8 @@ st.title('M&M Machine Learning Cost Proposal Tool')
 st.info('This is an Aid, Final Proposals are Subject to Partner Reviews')
 
 # Google Sheet ID and GID
-sheet_id = "1BXiGbxDcj7unwDmS4G3yg72_jORQYJejDYc7S4jEcl4"
-gid = "1289547923"
+sheet_id = "1-RpnD_G0mvaqWINletxUERqeQKOJ6K1ZiYyUqKIA6oU"
+gid = "263876729"
 # Construct export URL
 url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
 
@@ -133,4 +133,17 @@ if project_office and project_state and project_region and client_type and servi
   st.json(user_data)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
+
+new_row = pd.Series({col: np.nan for col in user_df.columns})
+
+# Update with values from user_data where keys match column names
+for key, value in user_data.items():
+    if key in new_row:
+        new_row[key] = value
+
+# Append the row to your main dataframe
+user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+
+st.success("Data appended successfully!")
+st.dataframe(user_df)
 
