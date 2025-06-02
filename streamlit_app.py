@@ -139,6 +139,7 @@ new_row = {col: 0 for col in user_df.columns}
 
 if project_office in user_df.columns:
     new_row[project_office] = 1
+    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
     user_df
 
 if project_state in user_df.columns:
