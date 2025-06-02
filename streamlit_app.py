@@ -69,6 +69,6 @@ with st.sidebar:
   st.write(f"Start Date: {default_start}")
   st.write(f"End Date: {default_finish}")
   # Optional validation
-  if start_date > end_date:
+  if default_start > default_end:
     st.error("Start date must be before or equal to end date.")
   
