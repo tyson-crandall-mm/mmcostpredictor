@@ -25,31 +25,39 @@ with st.sidebar:
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"))
   project_state = st.selectbox('Project State', ("Alaska",	"Arkansas",	"Arizona",	"California",	"Colorado",	"Connecticut",	"District of Columbia",	"Florida",	"Georgia", "Iowa",	"Idaho",	"Illinois",	"Indiana",	"Kansas",	"Kentucky",	"Massachusetts",	"Maryland",	"Maine",	"Michigan",	"Minnesota",	"Missouri",	"Montana",	"North Carolina",	"New Mexico",	"Nevada",	"New York",	"Ohio",	"Oklahoma",	"Oregon", "Pennsylvania",	"Puerta Rico",	"South Carolina",	"Tennessee",	"Texas",	"Virginia",	"Washington",	"Wisconsin",	"West Virginia", "Other"))
   client_type = st.selectbox('Client Type', ("Corporation", "Fiduciary", "Individual", "Non-Profit", "Partnership"))
-  staff_workload = {}
   selected_roles = st.multiselect("Select Seniority of Staff Member(s) on the Project", ["Senior Manager", "Administrator", "Staff", "Director", "Manager", "Officer", "Senior", "Associate", "Senior Executive", "Seasonal", "Owner", "Intern", "Intern PT", "Consultant", "Intern FT"])
-  # Initialize session state
-  if 'staff_workload' not in st.session_state:
-    st.session_state.staff_workload = {role: 0 for role in selected_roles}
-  # Total so far
-  current_total = sum(st.session_state.staff_workload.get(role, 0) for role in selected_roles)
-  remaining = max(0, 100 - current_total)
-  st.write(f"Total allocated: {current_total}%. Remaining: {remaining}%")
-  # Input sliders with dynamic max based on remaining percent
-  for role in selected_roles:
-    # Set dynamic max value
-    current_value = st.session_state.staff_workload.get(role, 0)
-    max_allowed = min(100, remaining + current_value)
-    new_val = st.slider(
-        f"{role} - Estimated % of Work",
-        min_value=0,
-        max_value=max_allowed,
-        step=5,
-        value=current_value,
-        key=f"slider_{role}"
-    )
-    st.session_state.staff_workload[role] = new_val
-    # Optional: Warning if total ≠ 100%
-  if current_total != 100:
-    st.warning("Total must equal 100% before submitting.")
+  # Initialize workload dictionary
+  staff_workload = {}
+  total = 0
+  
+  st.write("### Enter workload percentages (must total 100%)")
+  
+  # Display number inputs for selected roles
+  cols = st.columns(2)
+  for idx, role in enumerate(selected_roles):
+      with cols[idx % 2]:
+          percent = st.number_input(
+              f"{role} (%)",
+              min_value=0,
+              max_value=100,
+              step=1,
+              key=f"work_{role}"
+          )
+          staff_workload[role] = percent
+  
+  # Total
+  total = sum(staff_workload.values())
+  st.markdown(f"**Total Allocated: {total}%**")
+  
+  # Validation
+  if total < 100:
+      st.warning("Total is less than 100%.")
+  elif total > 100:
+      st.error("Total exceeds 100%. Please adjust the values.")
   else:
-    st.success("Total is 100%. Ready to submit.")
+      st.success("Total is exactly 100%. Ready to proceed!")
+  
+  # Optional: Show final allocation
+  if total == 100:
+      st.write("#### Final Workload Allocation")
+      st.json(staff_workload)
