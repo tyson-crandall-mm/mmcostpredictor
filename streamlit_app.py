@@ -21,7 +21,7 @@ df = pd.read_csv(url)
 df
 
 user_df = df
-user_df.iloc[:0]
+user_df = user_df.iloc[:0]
 user_df
 #Sidebar Integration
 with st.sidebar:
