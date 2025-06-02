@@ -32,7 +32,7 @@ with st.sidebar:
   south = {"FL", "TX", "GA", "SC", "NC", "TN", "VA", "AR", "KY", "AL", "MD", "DC", "PR"}
   northeast = {"NY", "MA", "CT", "NJ", "PA", "ME"}
   midwest = {"IL", "IN", "OH", "MI", "WI", "MO", "IA"}
-  west = {"CA", "CO", "WA", "OR", "NV", "AZ", "ID", "MT", "NM", "UT"}
+  west = {"AK", "CA", "CO", "WA", "OR", "NV", "AZ", "ID", "MT", "NM", "UT"}
   project_state = st.selectbox('Project State', ("AK",	"AR",	"AZ",	"CA",	"CO",	"CT",	"DC",	"FL",	"GA", "IA",	"ID",	"IL",	"IN",	"KS",	"KY",	"MA",	"MD",	"ME",	"MI",	"MN",	"MO",	"MT",	"NC",	"NM",	"NV",	"NY",	"OH",	"OK",	"OR", "PA",	"PR",	"SC",	"TN",	"TX",	"VA",	"WA",	"WI",	"WV"), index=None, placeholder="State...")
   def get_region(state):
     if state in south:
@@ -132,24 +132,22 @@ if all([project_office, project_state, project_region, client_type, services, st
   }
   st.success("All inputs collected successfully!")
   st.json(user_data)
+  user_df.drop(columns = "ActualBudgetAmount")
+
+  new_row = {col: 0 for col in user_df.columns}
+  
+  if project_office in user_df.columns:
+      new_row[project_office] = 1
+      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+  if project_state in user_df.columns:
+      new_row[project_state] = 1
+      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+  if project_region in user_df.columns:
+      new_row[project_region] = 1
+      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
+  if client_type in user_df.columns:
+      new_row[client_type] = 1
+      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
-#
-user_df.drop(columns = "ActualBudgetAmount")
-
-new_row = {col: 0 for col in user_df.columns}
-
-if project_office in user_df.columns:
-    new_row[project_office] = 1
-    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-if project_state in user_df.columns:
-    new_row[project_state] = 1
-    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-if project_region in user_df.columns:
-    new_row[project_region] = 1
-    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-if client_type in user_df.columns:
-    new_row[client_type] = 1
-    user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
 user_df
-
