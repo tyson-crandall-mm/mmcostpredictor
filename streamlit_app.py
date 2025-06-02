@@ -115,4 +115,4 @@ with st.sidebar:
     st.error("Please select both a start and end date.")
   # Get User Input in DataFrame
   user_data = {"ProjectOffice": project_office, "ProjectState": project_state, "ProjectRegion": project_region, "ClientType": client_type, "Services": services, "StaffWorkDistribution": staff_workload, "ProjectComplexity": project_complexity, "ProjectHours": project_hours, "EstimatedDates": estimated_dates}
-  
+  st.write(user_data)
