@@ -58,11 +58,11 @@ with st.sidebar:
   
   # Validation
   if total < 100:
-      st.warning("Total is less than 100%.")
+      st.warning("""**Total is less than 100%.**""")
   elif total > 100:
-      st.error("Total exceeds 100%. Please adjust the values.")
+      st.error("""**Total exceeds 100%. Please adjust the values.**""")
   else:
-      st.success("Total is exactly 100%. Ready to proceed!")
+      st.success("""**Total is exactly 100%. Ready to proceed!**""")
   # Getting Project Complexity
   complexity_levels = {0: "Basic", 1: "Easy", 2: "Moderate", 3: "Complex"}
   project_complexity = st.segmented_control("Project Complexity Level", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
