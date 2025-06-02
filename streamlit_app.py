@@ -63,3 +63,12 @@ with st.sidebar:
       st.success("Total is exactly 100%. Ready to proceed!")
   # Getting Project Start Date
   start_date = st.date_input('Estimated Start and Finish Date')
+  default_start = date.today()
+  default_finish = today + timedelta(days=1)
+  estimated_start_date, estimated_end_date = st.date_input("Project Estimated Start and Finish Date", value=(default_start, default_finish))
+  st.write(f"Start Date: {default_start}")
+  st.write(f"End Date: {default_finish}")
+  # Optional validation
+  if start_date > end_date:
+    st.error("Start date must be before or equal to end date.")
+  
