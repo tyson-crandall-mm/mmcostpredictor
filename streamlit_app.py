@@ -84,7 +84,6 @@ with st.sidebar:
   # Getting Project Complexity
   complexity_levels = {1: "Basic", 2: "Easy", 3: "Moderate", 4: "Complex"}
   project_complexity = st.segmented_control("Project Complexity Level", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
-  )
   # Getting Project Hours
   hour_levels = {1: "Extremely Little", 2: "Quite Little", 3: "Little", 4: "Moderate", 5: "High", 6: "Quite High", 7:"Extremely High"}
   project_hours = st.pills("Project Hours", options=hour_levels.keys(), format_func=lambda option: hour_levels[option], selection_mode="single")
