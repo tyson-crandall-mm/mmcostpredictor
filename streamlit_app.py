@@ -70,4 +70,11 @@ with st.sidebar:
   # Optional validation
   if default_start > default_finish:
     st.error("Start date must be before or equal to end date.")
+  # Check if a date range was returned
+  if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
+    estimated_start_date, estimated_end_date = estimated_dates
+    st.write(f"Start Date: {estimated_start_date}")
+    st.write(f"End Date: {estimated_end_date}")
+  else:
+    st.error("Please select both a start and end date.")
   
