@@ -4,3 +4,10 @@ backgroundColor="#00adef"
 secondaryBackgroundColor="#ffffff"
 textColor="#000000"
 font="sans serif"
+
+[logger]
+level = "error"
+
+[deprecation]
+showfileUploaderEncoding = false
+
