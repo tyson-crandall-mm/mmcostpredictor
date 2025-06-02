@@ -22,7 +22,7 @@ df = pd.read_csv(url)
 df
 #Sidebar Integration
 with st.sidebar:
-  st.header("Project Characteristics")
+  st.header("## Project Characteristics")
   # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"), index=None, placeholder="Location...")
   # Getting Project Location
