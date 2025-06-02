@@ -13,13 +13,16 @@ st.info('This is an Aid, Final Proposals are Subject to Partner Reviews')
 # Google Sheet ID and GID
 sheet_id = "1BXiGbxDcj7unwDmS4G3yg72_jORQYJejDYc7S4jEcl4"
 gid = "1289547923"
-
 # Construct export URL
 url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
 
 # Load into DataFrame
 df = pd.read_csv(url)
 df
+
+user_df = df
+user_df.drop(index=[0,], inplace=True)
+user_df
 #Sidebar Integration
 with st.sidebar:
   st.write("# Project Characteristics")
