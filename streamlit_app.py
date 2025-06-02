@@ -64,17 +64,23 @@ with st.sidebar:
   # Getting Project Dates
   default_start = date.today()
   default_finish = default_start + timedelta(days=1)
-  estimated_start_date, estimated_end_date = st.date_input("Project Estimated Start and Finish Date", value=(default_start, default_finish))
-  st.write(f"Start Date: {default_start}")
-  st.write(f"End Date: {default_finish}")
-  # Optional validation
-  if default_start > default_finish:
-    st.error("Start date must be before or equal to end date.")
-  # Check if a date range was returned
+  # Ask user for date range input
+  estimated_dates = st.date_input(
+      "Project Estimated Start and Finish Date",
+      value=(default_start, default_finish)
+  )
+  
+  # Check if a valid date range was returned
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
-    estimated_start_date, estimated_end_date = estimated_dates
-    st.write(f"Start Date: {estimated_start_date}")
-    st.write(f"End Date: {estimated_end_date}")
+      estimated_start_date, estimated_end_date = estimated_dates
+  
+      # Show selected dates
+      st.write(f"Start Date: {estimated_start_date}")
+      st.write(f"End Date: {estimated_end_date}")
+  
+      # Optional validation
+      if estimated_start_date > estimated_end_date:
+          st.error("Start date must be before or equal to end date.")
   else:
-    st.error("Please select both a start and end date.")
+      st.error("Please select both a start and end date.")
   
