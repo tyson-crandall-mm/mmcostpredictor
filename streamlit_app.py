@@ -56,8 +56,3 @@ with st.sidebar:
       st.error("Total exceeds 100%. Please adjust the values.")
   else:
       st.success("Total is exactly 100%. Ready to proceed!")
-  
-  # Optional: Show final allocation
-  if total == 100:
-      st.write("#### Final Workload Allocation")
-      st.json(staff_workload)
