@@ -114,7 +114,7 @@ with st.sidebar:
   user_data = {}
 
 # Only populate if required fields are filled
-if project_office and project_state and client_type and estimated_dates:
+if project_office and project_state and project_region and client_type and services and staff_workload and project_complexity and project_hours and estimated_dates:
   user_data = {
       "ProjectOffice": project_office,
       "ProjectState": project_state,
