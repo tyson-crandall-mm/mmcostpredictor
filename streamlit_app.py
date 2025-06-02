@@ -26,7 +26,25 @@ with st.sidebar:
   # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"), index=None, placeholder="Location...")
   # Getting Project Location
+  south = {"Florida", "Texas", "Georgia", "South Carolina", "North Carolina", "Tennessee", "Virginia", "Arkansas", "Kentucky", "Alabama", "Maryland", "District of Columbia", "Puerto Rico"}
+  northeast = {"New York", "Massachusetts", "Connecticut", "New Jersey", "Pennsylvania", "Maine"}
+  midwest = {"Illinois", "Indiana", "Ohio", "Michigan", "Wisconsin", "Missouri", "Iowa", "Other"}
+  west = {"California", "Colorado", "Washington", "Oregon", "Nevada", "Arizona", "Idaho", "Montana", "New Mexico", "Utah"}
   project_state = st.selectbox('Project State', ("Alaska",	"Arkansas",	"Arizona",	"California",	"Colorado",	"Connecticut",	"District of Columbia",	"Florida",	"Georgia", "Iowa",	"Idaho",	"Illinois",	"Indiana",	"Kansas",	"Kentucky",	"Massachusetts",	"Maryland",	"Maine",	"Michigan",	"Minnesota",	"Missouri",	"Montana",	"North Carolina",	"New Mexico",	"Nevada",	"New York",	"Ohio",	"Oklahoma",	"Oregon", "Pennsylvania",	"Puerta Rico",	"South Carolina",	"Tennessee",	"Texas",	"Virginia",	"Washington",	"Wisconsin",	"West Virginia", "Other"), index=None, placeholder="State...")
+  def get_region(state):
+    if state in south:
+        return "South"
+    elif state in northeast:
+        return "Northeast"
+    elif state in midwest:
+        return "Midwest"
+    elif state in west:
+        return "West"
+    else:
+        return "Unknown"
+  # Getting Client Region
+  if project_state:
+    project_region = get_region(project_state)
   # Getting Project Client Type
   client_type = st.selectbox('Client Type', ("Corporation", "Fiduciary", "Individual", "Non-Profit", "Partnership"), index=None, placeholder="Client Type...")
   # Getting Project Master Name
@@ -64,19 +82,12 @@ with st.sidebar:
   else:
       st.success("""**Total is exactly 100%. Ready to proceed!**""")
   # Getting Project Complexity
-  complexity_levels = {0: "Basic", 1: "Easy", 2: "Moderate", 3: "Complex"}
+  complexity_levels = {1: "Basic", 2: "Easy", 3: "Moderate", 4: "Complex"}
   project_complexity = st.segmented_control("Project Complexity Level", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
-  # Getting Project Dates
-  default_start = date.today()
-  default_finish = default_start + timedelta(days=1)
-  # Ask user for date range input
-  estimated_dates = st.date_input(
-      "Project Estimated Start and Finish Date",
-      value=(default_start, default_finish)
   )
   # Getting Project Hours
-  project_hours = {0: "Extremely Little", 1: "Quite Little", 2: "Little", 3: "Moderate", 4: "High", 5: "Quite High", 6:"Extremely High"}
-  project_complexity = st.pills("Project Hours", options=project_hours.keys(), format_func=lambda option: project_hours[option], selection_mode="single")
+  hour_levels = {1: "Extremely Little", 2: "Quite Little", 3: "Little", 4: "Moderate", 5: "High", 6: "Quite High", 7:"Extremely High"}
+  project_hours = st.pills("Project Hours", options=hour_levels.keys(), format_func=lambda option: hour_levels[option], selection_mode="single")
   st.warning("""\
   **Project Hours Guide**  
   - Extremely Little: 0 to 1 hours  
@@ -87,15 +98,21 @@ with st.sidebar:
   - Quite High: 39 to 80 hours  
   - Extremely High: 80+ hours\
   """)
-
-  
+  # Getting Project Dates
+  default_start = date.today()
+  default_finish = default_start + timedelta(days=1)
+  # Ask user for date range input
+  estimated_dates = st.date_input(
+    "Project Estimated Start and Finish Date",
+    value=(default_start, default_finish)
   # Check if a valid date range was returned
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
-      estimated_start_date, estimated_end_date = estimated_dates
-  
-      # Validation
-      if estimated_start_date > estimated_end_date:
-          st.error("Start date must be before or equal to end date.")
+    estimated_start_date, estimated_end_date = estimated_dates
+  # Validation
+  if estimated_start_date > estimated_end_date:
+    st.error("Start date must be before or equal to end date.")
   else:
-      st.error("Please select both a start and end date.")
+    st.error("Please select both a start and end date.")
+  # Get User Input in DataFrame
+  user_data = {"ProjectOffice": project_office, "ProjectState": project_state, "ProjectRegion": project_region, "ClientType": client_type, "Services": services, "StaffWorkDistribution": staff_workload, "ProjectComplexity": project_complexity, "ProjectHours": project_hours, "EstimatedDates": estimated_dates}
   
