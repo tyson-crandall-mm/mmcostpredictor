@@ -61,8 +61,7 @@ with st.sidebar:
       st.error("Total exceeds 100%. Please adjust the values.")
   else:
       st.success("Total is exactly 100%. Ready to proceed!")
-  # Getting Project Start Date
-  start_date = st.date_input('Estimated Start and Finish Date')
+  # Getting Project Dates
   default_start = date.today()
   default_finish = default_start + timedelta(days=1)
   estimated_start_date, estimated_end_date = st.date_input("Project Estimated Start and Finish Date", value=(default_start, default_finish))
