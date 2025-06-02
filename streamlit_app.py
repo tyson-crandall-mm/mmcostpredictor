@@ -20,6 +20,7 @@ url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=
 df = pd.read_csv(url)
 df
 
+project_region = None
 user_df = df
 user_df = user_df.iloc[:0]
 #Sidebar Integration
@@ -45,7 +46,6 @@ with st.sidebar:
     else:
         return "Unknown"
   # Getting Client Region
-  project_region = None
   if project_state:
     project_region = get_region(project_state)
   # Getting Project Client Type
