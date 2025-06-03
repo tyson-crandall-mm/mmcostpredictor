@@ -24,7 +24,7 @@ df
 user_df = df
 user_df = user_df.iloc[:0]
 #Sidebar Integration
-with st.sidebar:
+with st.form:
   st.write("# Project Characteristics")
   # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"), index=None, placeholder="Location...")
