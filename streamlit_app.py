@@ -172,9 +172,10 @@ if all([project_office, project_state, project_region, client_type, services, st
   new_row["ProjectDurationDays"] = project_duration_days
   
   user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  user_df
+  
 else:
   st.warning("Please complete all required fields to generate a project summary.")
+user_df
 model = joblib.load('xgb_model.pkl')
 prediction = model.predict(user_df)
 st.subheader("Predicted Budget Amount")
