@@ -157,6 +157,18 @@ if all([project_office, project_state, project_region, client_type, services, st
   for service in services:
       if service in user_df.columns:
           new_row[service] = 1
+
+  new_row["StartYear"] = estimated_start_date.year
+  new_row["StartMonth"] = estimated_start_date.month
+  new_row["StartDay"] = estimated_start_date.day
+  new_row["StartDayOfWeek"] = estimated_start_date.weekday()
+  new_row["EndYear"] = estimated_end_date.year
+  new_row["EndMonth"] = estimated_end_date.month
+  new_row["EndDay"] = estimated_end_date.day
+  new_row["FinishDayOfWeek"] = estimated_end_date.weekday()
+  project_duration_days = (estimated_end_date - estimated_start_date).days
+  new_row["ProjectDurationDays"] = project_duration_days
+  
   user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
