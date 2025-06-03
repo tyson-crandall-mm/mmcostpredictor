@@ -149,8 +149,9 @@ if all([project_office, project_state, project_region, client_type, services, st
       new_row[client_type] = 1
       user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
   for k, v in selected_roles.items():
-    if selected_roles[k] in user_df.columns:
-      new_row[selected_roles[k]] = 1
+      if k in user_df.columns:
+          new_row[k] = v
+          user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
 user_df
