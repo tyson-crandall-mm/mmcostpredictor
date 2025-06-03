@@ -154,32 +154,7 @@ if all([project_office, project_state, project_region, client_type, services, st
   for role in selected_roles:
       if role in user_df.columns:
           new_row[role] = 1
-
-# Add ProjectComplexityEncoded
-  new_row["ProjectComplexityEncoded"] = complexity_levels[project_complexity_key]
-  
-  # ✅ Append once after everything is set
   user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-
-
-"""  new_row = {col: 0 for col in user_df.columns}
-  
-  if project_office in user_df.columns:
-      new_row[project_office] = 1
-      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  if project_state in user_df.columns:
-      new_row[project_state] = 1
-      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  if project_region in user_df.columns:
-      new_row[project_region] = 1
-      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  if client_type in user_df.columns:
-      new_row[client_type] = 1
-      user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  for role in selected_roles:
-      if role in user_df.columns:
-          new_row[role] = 1
-  user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)"""
 else:
   st.warning("Please complete all required fields to generate a project summary.")
 user_df
