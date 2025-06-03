@@ -148,7 +148,7 @@ if all([project_office, project_state, project_region, client_type, services, st
   if client_type in user_df.columns:
       new_row[client_type] = 1
       user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
-  for role in selected_roles():
+  for role in selected_roles:
       if role in user_df.columns:
           new_row[role] = 1
           user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
