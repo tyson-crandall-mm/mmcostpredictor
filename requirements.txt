@@ -9,3 +9,4 @@ plotly
 datetime
 joblib
 xgboost
+shap
