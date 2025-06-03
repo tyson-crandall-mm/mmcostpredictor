@@ -149,11 +149,14 @@ if all([project_office, project_state, project_region, client_type, services, st
   
   if client_type in user_df.columns:
       new_row[client_type] = 1
-  
-  # One-hot encode staff roles
-  for role in selected_roles:
-      if role in user_df.columns:
-          new_row[role] = 1
+
+  for position, time in staff_workload.items():
+      if position in user_df.columns:
+          new_row[position] = (time/100)
+
+  for service in services:
+      if service in user_df.columns:
+          new_row[service] = 1
   user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)
 else:
   st.warning("Please complete all required fields to generate a project summary.")
