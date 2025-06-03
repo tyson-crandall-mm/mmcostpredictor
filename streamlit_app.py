@@ -180,6 +180,6 @@ if all([project_office, project_state, project_region, client_type, services, st
       if role in user_df.columns:
           new_row[role] = 1
   user_df = pd.concat([user_df, pd.DataFrame([new_row])], ignore_index=True)"""
-  else:
-    st.warning("Please complete all required fields to generate a project summary.")
+else:
+  st.warning("Please complete all required fields to generate a project summary.")
 user_df
