@@ -208,8 +208,10 @@ if st.button("Train Model"):
     st.balloons()
     st.write(f"RMSE on test set: {rmse:.2f}")
     import shap
-    model.load_model('model.json')
-    explainer = shap.Explainer(model)
+    explainer = shap.Explainer(model, X_train)
     shap_values = explainer(X_test)
-    shap.waterfall_plot(shap_values[0])
+    st.subheader("🔍 SHAP Explanation for First Test Sample")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    shap.plots.waterfall(shap_values[0], show=False)
+    st.pyplot(fig)
   
