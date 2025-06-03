@@ -93,13 +93,15 @@ with st.sidebar:
   project_hours = st.pills("Project Hours", options=hour_levels.keys(), format_func=lambda option: hour_levels[option], selection_mode="single")
   st.warning("""\
   **Project Hours Guide**  
-  - Extremely Little: 0 to 1 hours  
-  - Quite Little: 1 to 2 hours  
-  - Little: 2 to 5 hours  
-  - Moderate: 5 to 11 hours  
-  - High: 11 to 39 hours  
-  - Quite High: 39 to 80 hours  
-  - Extremely High: 80+ hours\
+- Extremely little: 0.10 to 1.20 hours
+- Quite Little: 1.21 to 2.48 hours
+- Little: 2.49 to 4.47 hours
+- Low Moderate: 4.48 to 10.02 hours
+- Moderate: 10.03 to 15.44 hours
+- High Moderate: 15.45 to 23.53 hours
+- High: 23.54 to 39.44 hours
+- Quite High: 39.45 to 80.45 hours
+- Extremely High: 80.46 to 932.75 hours
   """)
   # Getting Project Dates
   default_start = date.today()
