@@ -176,7 +176,32 @@ if all([project_office, project_state, project_region, client_type, services, st
 else:
   st.warning("Please complete all required fields to generate a project summary.")
 user_df
-model = joblib.load('xgb_model.pkl')
-prediction = model.predict(user_df)
-st.subheader("Predicted Budget Amount")
-st.write(f"${prediction[0]:,.2f}")
+
+if st.button("Train Model"):
+    from sklearn.model_selection import train_test_split
+    from xgboost import XGBRegressor
+    from sklearn.metrics import mean_squared_error
+    import joblib
+
+    X = df.drop(['ActualBudgetAmount'], axis=1)
+    y = df['ActualBudgetAmount']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = XGBRegressor(random_state=42)
+    try:
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+
+        mse = mean_squared_error(y_test, y_pred)
+        rmse = mse ** 0.5
+        st.success("Model trained successfully!")
+        st.write(f"RMSE on test set: {rmse:.2f}")
+
+        joblib.dump(model, 'xgb_model.pkl')
+        st.write("Model saved to xgb_model.pkl")
+
+        prediction = model.predict(user_df)
+        st.write(f"Prediction: {prediction[0]:.2f}")
+    except Exception as e:
+        st.error(f"Error during model fitting: {e}")
