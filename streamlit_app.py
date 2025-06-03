@@ -197,10 +197,9 @@ if st.button("Train Model"):
           mse = mean_squared_error(y_test, y_pred)
           rmse = mse ** 0.5
           joblib.dump(model, 'xgb_model.pkl')
-          st.write("Model saved to xgb_model.pkl")
   
           prediction = model.predict(user_df)
-          st.write(f"Prediction: {prediction[0]:.2f}")
+          st.write(f"Prediction: ${prediction[0]:.2f}")
       except Exception as e:
           st.error(f"Error during model fitting: {e}")
           st.stop()
