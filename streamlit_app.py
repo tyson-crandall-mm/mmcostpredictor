@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from datetime import date, timedelta
 import gspread
+import joblib
 project_region = None
 
 st.title('M&M Machine Learning Cost Proposal Tool')
@@ -114,7 +115,6 @@ with st.sidebar:
   else:
     st.error("Please select both a start and end date.")
   # Get User Input in DataFrame
-  user_data = {}
 
 # Only populate if required fields are filled
 user_data = {}
@@ -131,7 +131,6 @@ if all([project_office, project_state, project_region, client_type, services, st
       "EstimatedDates": estimated_dates
   }
   st.success("All inputs collected successfully!")
-  st.json(user_data)
   user_df.drop(columns = "ActualBudgetAmount")
 
   # Start with all zeros
@@ -150,6 +149,9 @@ if all([project_office, project_state, project_region, client_type, services, st
   if client_type in user_df.columns:
       new_row[client_type] = 1
 
+  new_row['ProjectEstimatedHours'] = project_hours
+  new_row['ProjectComplexityEncoded'] = project_complexity
+
   for position, time in staff_workload.items():
       if position in user_df.columns:
           new_row[position] = (time/100)
@@ -162,9 +164,9 @@ if all([project_office, project_state, project_region, client_type, services, st
   new_row["StartMonth"] = estimated_start_date.month
   new_row["StartDay"] = estimated_start_date.day
   new_row["StartDayOfWeek"] = estimated_start_date.weekday()
-  new_row["EndYear"] = estimated_end_date.year
-  new_row["EndMonth"] = estimated_end_date.month
-  new_row["EndDay"] = estimated_end_date.day
+  new_row["FinishYear"] = estimated_end_date.year
+  new_row["FinishMonth"] = estimated_end_date.month
+  new_row["FinishDay"] = estimated_end_date.day
   new_row["FinishDayOfWeek"] = estimated_end_date.weekday()
   project_duration_days = (estimated_end_date - estimated_start_date).days
   new_row["ProjectDurationDays"] = project_duration_days
@@ -173,3 +175,7 @@ if all([project_office, project_state, project_region, client_type, services, st
 else:
   st.warning("Please complete all required fields to generate a project summary.")
 user_df
+model = joblib.load('xgb_model.pkl')
+prediction = model.predict(user_df)
+st.subheader("Predicted Budget Amount")
+st.write(f"${prediction[0]:,.2f}")
