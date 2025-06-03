@@ -178,6 +178,7 @@ else:
 user_df
 
 if st.button("Train Model"):
+    user_df = user_df.drop(columns=['ActualBudgetAmount'])
     from sklearn.model_selection import train_test_split
     from xgboost import XGBRegressor
     from sklearn.metrics import mean_squared_error
