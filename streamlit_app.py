@@ -207,4 +207,9 @@ if st.button("Train Model"):
     st.success("Model trained successfully!")
     st.balloons()
     st.write(f"RMSE on test set: {rmse:.2f}")
+    import shap
+    model.load_model('model.json')
+    explainer = shap.Explainer(model)
+    shap_values = explainer(X_test)
+    shap.waterfall_plot(shap_values[0])
   
