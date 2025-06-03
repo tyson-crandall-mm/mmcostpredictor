@@ -188,21 +188,24 @@ if st.button("Train Model"):
     y = df['ActualBudgetAmount']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    model = XGBRegressor(random_state=42)
-    try:
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-
-        mse = mean_squared_error(y_test, y_pred)
-        rmse = mse ** 0.5
-        st.success("Model trained successfully!")
-        st.write(f"RMSE on test set: {rmse:.2f}")
-
-        joblib.dump(model, 'xgb_model.pkl')
-        st.write("Model saved to xgb_model.pkl")
-
-        prediction = model.predict(user_df)
-        st.write(f"Prediction: {prediction[0]:.2f}")
-    except Exception as e:
-        st.error(f"Error during model fitting: {e}")
+    with st.spinner("⏳ Training model and preparing prediction..."):
+      model = XGBRegressor(random_state=42)
+      try:
+          model.fit(X_train, y_train)
+          y_pred = model.predict(X_test)
+  
+          mse = mean_squared_error(y_test, y_pred)
+          rmse = mse ** 0.5
+          joblib.dump(model, 'xgb_model.pkl')
+          st.write("Model saved to xgb_model.pkl")
+  
+          prediction = model.predict(user_df)
+          st.write(f"Prediction: {prediction[0]:.2f}")
+      except Exception as e:
+          st.error(f"Error during model fitting: {e}")
+          st.stop()
+        
+    st.success("Model trained successfully!")
+    st.balloons()
+    st.write(f"RMSE on test set: {rmse:.2f}")
+  
