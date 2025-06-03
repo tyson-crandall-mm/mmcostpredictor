@@ -13,8 +13,8 @@ st.title('M&M Machine Learning Cost Proposal Tool')
 st.info('This is an Aid, Final Proposals are Subject to Partner Reviews')
 
 # Google Sheet ID and GID
-sheet_id = "1-RpnD_G0mvaqWINletxUERqeQKOJ6K1ZiYyUqKIA6oU"
-gid = "263876729"
+sheet_id = "1IjtfywWvzRNdROO8MZyA2eVe9voj3_eWbb8tSsex_Iw"
+gid = "853147414"
 # Construct export URL
 url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
 
@@ -89,7 +89,7 @@ with st.sidebar:
   complexity_levels = {1: "Basic", 2: "Easy", 3: "Moderate", 4: "Complex"}
   project_complexity = st.segmented_control("Project Complexity Level", options=complexity_levels.keys(), format_func=lambda option: complexity_levels[option], selection_mode="single")
   # Getting Project Hours
-  hour_levels = {1: "Extremely Little", 2: "Quite Little", 3: "Little", 4: "Moderate", 5: "High", 6: "Quite High", 7:"Extremely High"}
+  hour_levels = {1: "Extremely Little", 2: "Quite Little", 3: "Little", 4: "Low Moderate", 5: "Moderate", 6: "High Moderate", 7: "High", 8: "Quite High", 9:"Extremely High"}
   project_hours = st.pills("Project Hours", options=hour_levels.keys(), format_func=lambda option: hour_levels[option], selection_mode="single")
   st.warning("""\
   **Project Hours Guide**  
