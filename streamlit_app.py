@@ -112,8 +112,10 @@ with st.sidebar:
   if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
     estimated_start_date, estimated_end_date = estimated_dates
   # Validation
-  if estimated_start_date > estimated_end_date:
-    st.error("Start date must be before or equal to end date.")
+  if isinstance(estimated_dates, tuple) and len(estimated_dates) == 2:
+    estimated_start_date, estimated_end_date = estimated_dates
+    if estimated_start_date > estimated_end_date:
+        st.error("Start date must be before or equal to end date.")
   else:
     st.error("Please select both a start and end date.")
   # Get User Input in DataFrame
