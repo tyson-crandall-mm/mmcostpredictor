@@ -8,8 +8,8 @@ from datetime import date, timedelta
 import gspread
 import joblib
 project_region = None
-
-st.title('M&M Machine Learning Cost Proposal Tool')
+st.image('https://www.leasecrunch.com/hs-fs/hubfs/Firm%20Logos%20and%20Alliance%20Logos%20for%20Website/Meaden%20Moore.png?width=1585&height=618&name=Meaden%20Moore.png')
+st.title('Machine Learning Cost Proposal Tool')
 st.info('This is an Aid, Final Proposals are Subject to Partner Reviews')
 
 # Google Sheet ID and GID
@@ -26,7 +26,6 @@ user_df = df
 user_df = user_df.iloc[:0]
 #Sidebar Integration
 with st.sidebar:
-  st.image('https://www.leasecrunch.com/hs-fs/hubfs/Firm%20Logos%20and%20Alliance%20Logos%20for%20Website/Meaden%20Moore.png?width=1585&height=618&name=Meaden%20Moore.png')
   st.write("# Project Characteristics")
   # Getting Project Office
   project_office = st.selectbox('Project Office', ("Akron", "Beachwood", "Cleveland", "MCS", "Wooster"), index=None, placeholder="Location...")
